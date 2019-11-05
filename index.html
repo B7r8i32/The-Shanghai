@@ -4,9 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>The Shanghai - An Interactive Story</title>
 </head>
 <body>
     
+    <div id="intro">
+        <h1>The Shanghai</h1>
+
+        <p>One  cold Fall morning Tom woke up and headed streight out of bed to get some breakfast. After he ate his breakfast, Tom takes his old teddy bear and stuffs it into his backpack nervous for the first day of school. Tom then heads out the door confident now that he has his teddy bear. Without Tom knowing the bear slips away from the boys backpack and dissapears.</p>
+    </div>
+    <!--<h2>Does Tom run away?</h2>-->
+    <div id="story">
+
+    </div>
+
+    <div id="buttons">
+
+    </div>
+
+    <script>
+    
+        let storyContainer = document.getElementById("story");
+    
+        let buttonContainer = document.getElementById("buttons");
+        let history = ["intro"];
+        const story = {
+            intro : {
+                text : "On a gray and windy day, 6 yr old Tom was walking back home from a long day of school daydreaming as he always does. While he was walking, Tom became very unaware of his surroundings. After a while of walking Tom soon feels a soft fluffy paw clasp around his hand.",
+                choices : [
+                    ["Tom runs away", "page1"],
+                    ["Tom doesn't move", "page2"],
+                ]
+            },
+            page1 : {
+                text : "Tom suddenly slips away from the paw and heads to his house .He opens his bag trying to find his teddybear. He looks in his room and finds the bear sitting on a chair watching him. Tom walks towards the bear and then hugs it out of releif (But this particular bear posessed a demon that haunted his family especially his mother for many years. Toms family line had always wondered why they had such bad luck.But it wasnt the family that carried bad luck, it was that old teddy bear ",
+                choices : [
+                    ["Tom gets rid of the bear", "page5"],
+                    ["Tom keeps the bear", "page7"]
+                ]
+            },
+            page2 : {
+                text : "He suddenly feels a soft paw on his arm and gets snatched away by his teddybear. This specific teddy bear was no ordinary teddybear. This particular bear was actually a demon who had possessed Tom. Later Tom eventually returns home the next morning holding his old teddy bear.(To be more specific this teddy bear is a demon that haunted his family especially his mother for many years.) Toms family line had always wondered why they had such bad luck.But it wasnt the family that carried bad luck, it was that old teddy bear",
+                choices : [
+                    ["The boy returns as a demon", "page3"],
+                    ["The boy returns as a ghost", "page4"]
+                ]
+            },
+            page3 : {
+                text : "When Tom got home, he heads to the kitchen unable to comprehend what  had happened. Am I dead?  Am I alive? he asked. Tom then hears a horrible voice oming from the bear he was hugging. Yes, the demon said. Tom replied to the demon by saying, So I am dead. But how am I alive? he asked. The demon gave no answer. When Tom came back home , tom was unaware that the mother was watching him and the bear the whole time. So the mom threw the bear away",
+                choices : [
+                    ["Next", "page7"]
+                ]
+            },
+            page4 : {
+                text : "Without the mother knowing, the demon had tooken full control of Toms body. The demon which brought bad luck to his family, sadly took over Toms body.And the mother realized he was no longer Tom.Mainly because the mother had experienced a demonic experience when she was younger. So the mother was very familiar with a demonic presnece.She beleived it was the bear hat caused all of this",
+                choices : [
+                    ["Mother burns the bear", "page8"],
+                    ["Mother throws away the bear", "page7"]
+                ]
+            },
+            page5 : {
+                text : "Until one day Tom felt as if he needed a new teddy bear. He then tossed the bear into the trashcan and asked his mom if he could have a new one. The mother agreed, but that made the demon mad. Later that night the mother was reading her son a story before bed",
+                choices : [
+                    ["Next", "page6"]
+                ]
+            },
+            page6 : {
+                text : "As the mother was reading they both heard a rattle coming from the trash can .Then out of no where the demon flew out of the old bear and went into the kid. Minutes later, the demon has been exorcised by the long and intense prayer the mother had done. After this experience Tom never thought about buying another toy again",
+                choices : [
+                    ["Next", "page9"]
+                ]
+            },
+            page7 : {
+                text : "When the mother threw the bear away, she heard a loud thump. The trash bin had fallen and the bear was gone. The mother had waited for this moment to come ever since she was a child, and exorcized the bear to help her son. She soon came to the conclusion that her son was no longer the same.",
+                choices : [
+                    ["Next", "page9"]
+                ]
+            },
+            page8 : {
+                text : "The mother knew  all along that the bear was demonic, but she waited for the right time to get rid of it. She had the courage to get rid of the bear. So the mother then began to burn the bear, and began to  say an intense prayer. As she did she could see that her prayer had worked and got rid of the  demonic bear.",
+                choices : [
+                    ["Next", "page9"]
+                ]
+            },
+            page9 : {
+                text : "The End",
+                choices : []
+            }
+        }
+        function makeButton(btnText, choice){
+            let button = document.createElement("button");
+            button.innerHTML = btnText;
+            buttonContainer.appendChild(button);
+            button.addEventListener ("click", function() {
+                history.push(choice);
+                showStory();
+            });
+        }
+        function buildStory(text) {
+            let storyItem = document.createElement("p");
+            storyItem.innerText = text;
+            storyContainer.appendChild(storyItem);
+        }
+        function showStory(){
+            let currentPage = history[history.length - 1]; // set currentPage to last index of history array.
+            storyContainer.innerHTML = ""; // reset html
+            buttonContainer.innerHTML = ""; // reset buttons
+            
+            for(let page of history){ // build story text from items in history array
+                buildStory(story[page].text);
+            }
+            
+            for(let choice of story[currentPage].choices){ // build buttons from choices property of most recent story choice
+                makeButton(choice[0], choice[1])
+            }
+        }
+        showStory();
+        
+        
+    </script>
+      
 </body>
 </html>
